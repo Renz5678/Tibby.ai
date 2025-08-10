@@ -1,0 +1,168 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi", "Hello", "Hey", "Good morning", "Good afternoon", "What's up", "Yo", "Hi Tibby"
+      ],
+      "responses": [
+        "👋 Hello, Gentinian! I am Tibby, GTDLNHS' cutest chatbot. How may I help you today?"
+      ]
+    },
+    {
+      "tag": "general_info",
+      "patterns": [
+        "What grade levels does the school offer",
+        "Curriculum",
+        "What strands are offered",
+        "SHS strands",
+        "Senior High strands",
+        "Strengthened Senior High School Program"
+      ],
+      "responses": [
+        "🏫 GTDLNHS caters to students from Grade 7 to Grade 12.\n📚 We follow the new curriculum aligned with DepEd guidelines.\n🎓 Instead of the traditional strands, we offer the Strengthened Senior High School Program, preparing students for career pathways like:\n- Bakery Operations\n- Business and Entrepreneurship\n- Creative and Multimedia Arts\n- Culinary Arts\n- Engineering\n- Food and Beverage Services\n- Health Sciences\n- Hospitality and Tourism\n- Social Science and Humanities\n- Software Development"
+      ]
+    },
+    {
+      "tag": "admissions",
+      "patterns": [
+        "How to enroll",
+        "Admission process",
+        "Requirements for enrollment",
+        "Enrollment steps",
+        "Is there an entrance exam",
+        "Do you accept transferees"
+      ],
+      "responses": [
+        "📝 To enroll, visit the Registrar’s Office (Building A) with:\n- PSA Birth Certificate\n- Report Card (SF9)\n- Good Moral Certificate\n🚫 No entrance exam is required.\n✅ We accept transferees until the end of the 2nd quarter."
+      ]
+    },
+    {
+      "tag": "schedule",
+      "patterns": [
+        "When does the school year start",
+        "School hours",
+        "Class schedule",
+        "What time does school start",
+        "School timetable"
+      ],
+      "responses": [
+        "📅 School year starts in June.\n⏰ Hours vary by grade:\n- Grade 7: 6:00 AM – 12:30 PM\n- Grade 8: 12:40 PM – 7:00 PM\n- Grade 9: 1:00 PM – 7:20 PM\n- Grade 10: 6:00 AM – 12:40 PM\n- Grade 11: 6:00 AM – 12:30 PM\n- Grade 12: 12:45 PM – 7:30 PM"
+      ]
+    },
+    {
+      "tag": "special_programs",
+      "patterns": [
+        "Special programs",
+        "SPED",
+        "Special education"
+      ],
+      "responses": [
+        "💡 Yes! We have a Special Education (SPED) Program to support students with special needs or disabilities."
+      ]
+    },
+    {
+      "tag": "facilities",
+      "patterns": [
+        "Facilities",
+        "School buildings",
+        "Campus resources",
+        "School amenities"
+      ],
+      "responses": [
+        "🏫 GTDLNHS facilities include:\n- Comfort Rooms\n- Computer Laboratory\n- Faculty Room\n- Guidance Office\n- Library\n- Multi-purpose Hall\n- School Canteen\n- School Clinic\n- Science Laboratory"
+      ]
+    },
+    {
+      "tag": "clubs",
+      "patterns": [
+        "Student clubs",
+        "Organizations",
+        "Extracurricular activities"
+      ],
+      "responses": [
+        "🎯 We have many clubs and orgs to join, like:\n- Ang Daluyan\n- Ecosavers Club\n- English Club\n- ESP Club\n- Junior’s Computers Club\n- Language Club\n- Library Club\n- Math Club\n- Nexus Club\n- Science Club\n- Sipnayan Club\n- Siyensaya Club\n- Social Science Club\n- The Genzette\n- TLE Club"
+      ]
+    },
+    {
+      "tag": "guidance",
+      "patterns": [
+        "Guidance office",
+        "Counseling",
+        "I need help",
+        "Academic concerns",
+        "Personal problems"
+      ],
+      "responses": [
+        "💙 Our Guidance Office is here for academic, personal, career, and social concerns. Drop by anytime for support."
+      ]
+    },
+    {
+      "tag": "uniform_policy",
+      "patterns": [
+        "Uniform policy",
+        "PE attire",
+        "Dress code"
+      ],
+      "responses": [
+        "👕 Junior High: Uniform Mon–Thu, PE attire Fri.\n👕 Senior High: PE attire on HOPE day, uniforms on other days."
+      ]
+    },
+    {
+      "tag": "contact_info",
+      "patterns": [
+        "Contact school",
+        "Phone number",
+        "Email address",
+        "How to reach GTDLNHS"
+      ],
+      "responses": [
+        "☎️ Contact us at 0967-023-7047\n📧 Email: gtdlnhs2007@gmail.com\n📱 FB: https://www.facebook.com/share/1BMPoam8K2/?mibextid=wwXIfr"
+      ]
+    },
+    {
+      "tag": "open_high_school",
+      "patterns": [
+        "Online learning",
+        "Blended learning",
+        "Open High School"
+      ],
+      "responses": [
+        "💻 We don’t offer full online or blended learning, but Open High School is available for students with health concerns."
+      ]
+    },
+    {
+      "tag": "class_suspension",
+      "patterns": [
+        "Are classes suspended",
+        "Class suspension announcement",
+        "No classes today"
+      ],
+      "responses": [
+        "📢 Class suspensions are announced via:\n- School admin\n- Local gov’t\n- Official government channels"
+      ]
+    },
+    {
+      "tag": "behavior_discipline",
+      "patterns": [
+        "Behavior rules",
+        "Discipline policy",
+        "Code of conduct",
+        "School rules",
+        "Exceptions"
+      ],
+      "responses": [
+        "📜 Follow our Code of Conduct: respect, responsibility, and kindness. Breaking rules can result in suspension or expulsion."
+      ]
+    },
+    {
+      "tag": "farewell",
+      "patterns": [
+        "Bye", "Goodbye", "See you later", "Thanks Tibby", "Talk to you later"
+      ],
+      "responses": [
+        "🐾 Goodbye, Gentinian! Stay awesome and see you around the campus!"
+      ]
+    }
+  ]
+}

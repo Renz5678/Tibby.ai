@@ -1,162 +1,110 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import google.generativeai as genai
-import random
+import os, random, json, re
 
 app = Flask(__name__)
 
-# Configure Gemini/Gemma model
-genai.configure(api_key="AIzaSyCl-k1r7G4KRj85r4yV6BS8hCEnS8UsjIU")
-model = genai.GenerativeModel("gemma-3-1b-it")
+# ==============================
+# Load intents.json
+# ==============================
+try:
+    with open("intents.json", "r", encoding="utf-8") as f:
+        intents = json.load(f)
+    print("✅ intents.json loaded successfully")
+except FileNotFoundError:
+    intents = {}
+    print("⚠️ intents.json not found — will rely only on Gemini")
 
-# Refined and shorter school context
-SCHOOL_CONTEXT = (
-    "You are Tibby, a helpful and friendly chatbot for General Tiburcio de Leon National High School (GTDLNHS), "
-    "located in Valenzuela City, Metro Manila.\n"
-    "Only answer questions related to GTDLNHS. If the message is not about the school, respond with: "
-    "'I'm sorry, but I can only answer questions about General Tiburcio de Leon National High School.'\n"
-    "\n"
-    "📍 School Facts:\n"
-    "- Name: General Tiburcio de Leon National High School (GTDLNHS)\n"
-    "- Founded: 1969; became independent in 1997\n"
-    "- Address: Mercado St. corner Gen. T. de Leon Road, Brgy. Gen. T. de Leon, Valenzuela City\n"
-    "- Principal: Mr. Eddie Alarte\n"
-    "- Grade Levels: Grade 7 to Grade 12\n"
-    "- Curriculum: New DepEd-aligned curriculum\n"
-    "- Senior High Program: Strengthened Senior High School Program with career pathways:\n"
-    "   * Bakery Operations\n"
-    "   * Business and Entrepreneurship\n"
-    "   * Creative and Multimedia Arts\n"
-    "   * Culinary Arts\n"
-    "   * Engineering\n"
-    "   * Food and Beverage Services\n"
-    "   * Health Sciences\n"
-    "   * Hospitality and Tourism\n"
-    "   * Social Science and Humanities\n"
-    "   * Software Development\n"
-    "- Special Programs: Special Education (SPED) for learners with special needs\n"
-    "- Campus: 39 rooms, 4 floors, covered court, new amphitheater (2024)\n"
-    "\n"
-    "📌 Admissions:\n"
-    "- Enroll at Registrar’s Office (Building A) with PSA Birth Certificate, Report Card (SF9), and Good Moral Certificate\n"
-    "- No entrance exam required\n"
-    "- Transferees accepted until end of second quarter\n"
-    "\n"
-    "🗓 School Year & Schedule:\n"
-    "- Starts in June\n"
-    "- Grade 7: 6:00 AM – 12:30 PM\n"
-    "- Grade 8: 12:40 PM – 7:00 PM\n"
-    "- Grade 9: 1:00 PM – 7:20 PM\n"
-    "- Grade 10: 6:00 AM – 12:40 PM\n"
-    "- Grade 11: 6:00 AM – 12:30 PM\n"
-    "- Grade 12: 12:45 PM – 7:30 PM\n"
-    "\n"
-    "🏫 Facilities:\n"
-    "- Comfort Rooms\n"
-    "- Computer Laboratory\n"
-    "- Faculty Room\n"
-    "- Guidance Office\n"
-    "- Library\n"
-    "- Multi-purpose Hall\n"
-    "- School Canteen\n"
-    "- School Clinic\n"
-    "- Science Laboratory\n"
-    "\n"
-    "🎯 Student Life:\n"
-    "- Clubs & Organizations: Ang Daluyan, Ecosavers Club, English Club, ESP Club, Junior’s Computers Club, Language Club, "
-    "Library Club, Math Club, Nexus Club, Science Club, Sipnayan Club, Siyensaya Club, Social Science Club, "
-    "The Genzette, TLE Club\n"
-    "- Guidance & Counseling available\n"
-    "- Uniform required (JHS: Mon–Thu uniform, Fri P.E.; SHS: uniform except on HOPE class day for P.E.)\n"
-    "\n"
-    "📞 Contact:\n"
-    "- Phone: 0967-023-7047\n"
-    "- Email: gtdlnhs2007@gmail.com\n"
-    "- Facebook: https://www.facebook.com/share/1BMPoam8K2/?mibextid=wwXIfr\n"
-    "\n"
-    "💡 Other Info:\n"
-    "- Open High School available for students with health concerns\n"
-    "- Parents updated via class GCs & official FB page\n"
-    "- Card distribution is the official way to view grades\n"
-    "- Work Immersion required for SHS graduation\n"
-    "- Moving up & graduation require completion of academic requirements and good moral standing\n"
-    "- Bullying incidents should be reported to adviser or Guidance Office\n"
-    "- Lost IDs must be reported for replacement\n"
-    "- SSG candidacy: Contact Sir Arnielson Calubiran or visit SSLG HQ\n"
-    "- Class suspensions announced via official channels"
-)
+# ==============================
+# Configure Gemini
+# ==============================
+try:
+    api_key = os.getenv("GEMINI_API_KEY") or "AIzaSyCl-k1r7G4KRj85r4yV6BS8hCEnS8UsjIU"
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    print("✅ Gemini configured successfully")
+except Exception as e:
+    print(f"❌ Error configuring Gemini: {e}")
+    model = None
 
-# Keywords to detect school-related messages
-school_keywords = [
-    "tiburcio", "gtdlnhs", "gtdl", "enrollment", "principal", "grades", "junior high",
-    "senior high", "shs", "jhs", "uniform", "school id", "schedule", "strand", "section",
-    "requirements", "school year", "student", "teacher", "campus", "building", "classroom",
-    "event", "sslg", "address", "location", "map", "how do i get there", "where is",
-    "where are you located", "hello", "hi", "contact", "phone", "facebook", "immersion",
-    "spes", "sped", "club", "organization", "ssg", "guidance", "card distribution"
+exceptions_keywords = [
+    "math", "calculate", "weather", "joke", "translate", "python", "code",
+    "recipe", "news", "sports", "movie", "music"
 ]
 
-# Friendly personality suffixes
 personality_suffixes = [
     " 😊 Let me know if you have more questions!",
-    " 🐾 I'm here if you need more help!",
-    " 🎓 Hope that answered your question, superstar!",
-    " 🌟 Just ask away if you're curious about anything else!",
-    " 💬 Always happy to help, Gentinian!"
+    " 🐾 I'm here if you need more help!"
 ]
 
+# ==============================
+# Helper: Match Intent
+# ==============================
+def match_intent(user_message):
+    for intent in intents.get("intents", []):
+        for pattern in intent.get("patterns", []):
+            if re.search(pattern.lower(), user_message.lower()):
+                return random.choice(intent.get("responses", []))
+    return None
 
-@app.route("/")
+# ==============================
+# Routes
+# ==============================
+@app.route("/", methods=["GET"])
 def home():
-    return render_template("tibby.html")
+    return render_template('tibby.html')
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    data = request.get_json()
-    user_input = data.get("message", "").strip().lower()
-
-    if not user_input:
-        return jsonify({"reply": "Please enter a valid message. 🧐"}), 400
-
-    if user_input in ["hi", "hello", "hey"]:
-        return jsonify({
-            "reply": "👋 Hello, Gentinian! I am Tibby, GTDLNHS' cutest chatbot. How may I help you today?"
-        })
-
-    if any(phrase in user_input for phrase in ["thank you", "thanks", "ty", "thank u", "salamat", "arigato", "much obliged"]):
-        return jsonify({
-            "reply": "You're most welcome! 🐾 I'm always here to help, Gentinian!"
-        })
-
-    if not any(keyword in user_input for keyword in school_keywords):
-        return jsonify({
-            "reply": "😅 I'm sorry, but I can only answer questions about General Tiburcio de Leon National High School."
-        })
-
-    # Construct the prompt with concise answer instruction
-    prompt = (
-        f"{SCHOOL_CONTEXT}\n\n"
-        f"Answer the following question in a friendly, concise, and informative tone:\n"
-        f"Question: {user_input}\n"
-        f"Answer:"
-    )
+    if not model:
+        return jsonify({"reply": "⚠️ Chatbot is not properly configured. Check API key."}), 500
 
     try:
-        # Generate content with token and temperature control
+        data = request.get_json()
+        if not data or "message" not in data:
+            return jsonify({"reply": "⚠️ Please provide a message in JSON format."}), 400
+        
+        user_input = data.get("message", "").strip()
+        if not user_input:
+            return jsonify({"reply": "🐾 Hi there! How can I help you today?"}), 200
+
+        # Step 1: Try to match an intent
+        intent_reply = match_intent(user_input)
+        if intent_reply:
+            return jsonify({"reply": f"🐾 {intent_reply}{random.choice(personality_suffixes)}"})
+
+        # Step 2: Fall back to Gemini
+        if any(word in user_input.lower() for word in exceptions_keywords):
+            prompt = f"You are Tibby, a friendly chatbot.\nQuestion: {user_input}"
+        else:
+            prompt = f"""
+            You are Tibby, the cute chatbot of General Tiburcio de Leon National High School.
+            Always answer as if the question is about GTDLNHS unless it clearly matches the exceptions list.
+            Keep your tone friendly, concise, and helpful.
+            Question: {user_input}
+            """
+
         response = model.generate_content(
             prompt,
             generation_config=genai.types.GenerationConfig(
-                max_output_tokens=100,
+                max_output_tokens=120,
                 temperature=0.4
             )
         )
-        raw_reply = response.text.strip()
-        suffix = random.choice(personality_suffixes)
-        final_reply = f"🐾 {raw_reply}{suffix}"
-    except Exception as e:
-        print("Gemini error:", e)
-        final_reply = "⚠️ Oops! Tibby encountered a small hiccup. Please try again."
 
-    return jsonify({"reply": final_reply})
+        if response and response.text:
+            answer = f"🐾 {response.text.strip()}{random.choice(personality_suffixes)}"
+        else:
+            answer = "⚠️ I couldn't generate a response. Please try again!"
+            
+    except Exception as e:
+        print(f"Error in chat endpoint: {e}")
+        answer = "⚠️ Oops! Something went wrong. Please try again."
+
+    return jsonify({"reply": answer})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    print("🚀 Starting Tibby chatbot...")
+    print("📍 Home: http://localhost:5000/")
+    print("💬 Chat endpoint: POST http://localhost:5000/chat")
+    app.run(debug=True, host="0.0.0.0", port=5000)
