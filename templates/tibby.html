@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons8-chatbot-96.png') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <title>Tibby</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <!--Column Pane-->
+        <div class="navipane">
+            <div class="intro">
+                <h2>Hi, I am Tibby!</h2>
+            </div>
+
+            <div class="hiyathere">
+                <p>
+                    💬✨ Hi there! I'm Tibby!  
+                    Your super helpful FAQ buddy for GTDLNHS! 🐾🎓
+                    Got questions? ❔🤔
+                    I’ve got answers — fast, friendly, and fuss-free! 📚🧠
+                    Ask away, and let’s make things easy-peasy! 🌟
+                </p>
+            </div>
+
+            <div class="socmed">
+                <h4>Contact Us:</h4>
+                <br>
+                <ul>
+                    <li><a href="https://www.facebook.com/gtdlnhs2007/" target="_blank" title="GTDLNHS Official Facebook Account">🌐 GTDLNHS Official</a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100083732547402" target="_blank" title="Records office">🌐 GTDLNHS Registrar</a></li>
+                    <li><a href="https://www.facebook.com/GtdlNhsSHS" target="_blank" title="SHS Account">🌐 GTDLNHS SHS</a></li>
+                    <li><a href="https://www.facebook.com/gtdlnhssupremestudentgovernment" target="_blank" title="GTDLNHS SSLG">🌐 GTDLNHS SSLG</a></li>
+                    <li><a href="https://www.facebook.com/TheGenzette" target="_blank" title="The Genzette Facebook Page">🌐 Official English Publication</a></li>
+                    <li><a href="https://www.facebook.com/angdaluyan" target="_blank" title="Ang Daluyan Facebook Page">🌐 Official FIlipino Publication</a></li>
+                </ul>
+            </div>
+
+            <div class="contact">
+                <ul>
+                    <h4>Address:</h4>
+                    <li>
+                        <a href="https://www.google.com/maps/dir/14.6837065,120.9898054/14.68767,120.99924/@14.6857966,120.9839422,15z/data=!3m1!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu&g_ep=EgoyMDI1MDYzMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" title="Directions">📍 Corner Mercado Street, Gen. T. De Leon, Valenzuela City, Metro Manila</a>
+                    </li>
+                    <br>
+
+                    <h4>Email Address:</h4>
+                    <li>
+                        📩 <a href="mailto:gtdlnhs2007@gmail.com" title="Email GTDLNHS">gtdlnhs2007@gmail.com</a>
+                    </li>
+                    <br>
+
+                    <h4>Contact Number:</h4>
+                    <li>
+                        📱 0956 023 7047
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Main Content Box-->
+        <div class="contentbox">
+
+            <!--floating chatbox-->
+            <div class="chatbox">
+
+                <!--chat header-->
+                <div class="chatheader">
+                    <div class="icon">
+                        <!-- Optional user icon goes here -->
+                    </div>
+
+                    <div class="details">
+                        <div class="name">Tibby</div>
+                        <div class="active">🟢 Active now</div>
+                    </div>
+
+                    <div class="info">
+                        <img src="{{ url_for('static', filename='images/icons8-call-50.png') }}" alt="Call icon" title="Call not yet available">
+                        <img src="{{ url_for('static', filename='images/icons8-info-50.png') }}" alt="Info icon" title="I am Tibby, GTDLNHS' cutest chatbot!">
+                    </div>
+                </div>
+
+                <!--main chat content-->
+                <div class="chatcontent">
+                    <!-- Messages will appear here -->
+                     <div></div>
+                </div>
+
+                <!--Text box for user-->
+                <div class="textbox">
+                    <div class="inputBox">
+                        <div class="searchIcon">
+                            <img src="{{ url_for('static', filename='images/icons8-search-64.png') }}" alt="Search icon">
+                        </div>
+                        <input id="query" type="text" placeholder="Enter your query here" autocomplete="off">
+                        <button id="submit" onclick="sendMessage()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
