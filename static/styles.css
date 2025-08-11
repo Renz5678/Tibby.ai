@@ -30,6 +30,16 @@ html, body {
     color: bisque;
     overflow-y: hidden;
 }
+.menu-btn {
+    display: none;
+    background-color: #0044cc;
+    color: white;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin: 0.5rem;
+}
 
 .intro {
     margin-bottom: 1rem;
@@ -208,6 +218,7 @@ html, body {
     justify-content: center;
     align-items: center;
     margin-right: 0.5rem;
+    font-weight: bolder;
 }
 
 .searchIcon img {
@@ -309,9 +320,200 @@ a:hover {
     }
 }
 
+@media (max-width: 600px) { 
+    html, body { 
+        font-size: 14px;
+        overflow: hidden; /* Prevent scrolling */
+        color: bisque; 
+        height: 100vh; /* Full viewport height */
+        width: 100vw; /* Full viewport width */
+        margin: 0;
+        padding: 0;
+        position: fixed; /* Lock to viewport */
+        top: 0;
+        left: 0;
+    } 
+ 
+    .container { 
+        flex-direction: column; 
+        height: 100vh; /* Full screen height */
+        width: 100vw; /* Full screen width */
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+    } 
+ 
+    /* Menu button */
+    .menu-btn { 
+        display: block; 
+        background-color: #0044cc; 
+        color: white; 
+        padding: 0.5rem 1rem; 
+        cursor: pointer; 
+        font-size: 1rem; 
+        border-radius: 0; /* Remove border radius for full edge */
+        margin: 0; /* Remove margins */
+        text-align: center;
+        width: 100vw; /* Full width */
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    } 
+ 
+    /* Collapsed navipane on mobile */
+    .navipane { 
+        display: none;
+        width: 100vw; /* Full width */
+        height: auto;
+        max-height: calc(100vh - 60px); /* Leave space for menu button */
+        flex-direction: column; 
+        padding: 0.5rem; 
+        font-size: 0.85rem; 
+        background-color: rgba(139, 3, 3, 0.966); 
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.2); 
+        position: fixed; /* Fixed positioning */
+        top: 60px; /* Below menu button */
+        left: 0; 
+        z-index: 999;
+        overflow-y: auto; /* Allow scrolling within navipane if needed */
+    } 
+ 
+    .navipane.show { 
+        display: flex;
+    } 
+ 
+    .intro h2 { 
+        font-size: 1.5rem; 
+        animation: none;
+        white-space: normal;
+        width: 100%; 
+        margin: 0;
+        padding: 1rem;
+    } 
+ 
+    .contentbox { 
+        width: 100vw; /* Full width */
+        height: calc(100vh - 60px); /* Full height minus menu button */
+        padding: 0;
+        margin: 0;
+        position: fixed;
+        top: 60px; /* Below menu button */
+        left: 0;
+    } 
+ 
+    .chatbox { 
+        width: 100vw; /* Full width */
+        height: calc(100vh - 60px); /* Full height minus menu button */
+        border-radius: 0; /* Remove border radius for full screen */
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        top: 60px;
+        left: 0;
+    } 
+ 
+    .chatheader { 
+        flex-direction: row; 
+        justify-content: flex-start; 
+        padding: 0.5rem;
+        width: 100% /* Account for padding */
+        position: sticky;
+        top: 0;
+        background: inherit;
+        background-color: rgba(139, 3, 3, 0.966);
+        z-index: 998;
+    } 
+ 
+    .icon { 
+        height: 40px; 
+        width: 40px; 
+    } 
+ 
+    .messages { 
+        height: calc(100vh - 180px); /* Full height minus header and input */
+        width: 100%;
+        overflow-y: auto;
+        padding: 0.5rem;
+        box-sizing: border-box;
+    }
+ 
+    .messages__item { 
+        max-width: 90%; 
+        font-size: 0.85rem; 
+        padding: 8px 12px; 
+    } 
+ 
+    .inputBox { 
+        flex-direction: row; 
+        padding: 0.5rem;
+        width: calc(100vw - 1rem); /* Account for padding */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: inherit;
+        z-index: 998;
+        box-sizing: border-box;
+    } 
+ 
+    .inputBox input { 
+        font-size: 0.9rem; 
+        margin: 0;
+        flex: 1;
+        border: none;
+        outline: none;
+    } 
+ 
+    button { 
+        font-size: 0.9rem; 
+        padding: 0.4rem 0.8rem;
+        border: none;
+        cursor: pointer;
+    } 
+} 
+
+@media (max-width: 600px) { 
+    .navipane { 
+        display: none; 
+        flex-direction: column;
+        width: 100vw;
+        height: calc(100vh - 60px);
+        position: fixed;
+        top: 60px;
+        left: 0;
+    } 
+    .navipane.open { 
+        display: flex; 
+    } 
+    .nav-toggle { 
+        display: block; 
+        background: rgba(139, 3, 3, 0.966); 
+        color: white; 
+        padding: 0.5rem; 
+        border: none; 
+        cursor: pointer;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1001;
+    } 
+} 
+
+@media (min-width: 601px) { 
+    .nav-toggle { 
+        display: none; 
+    } 
+}
+
+
+
 /* width */
 ::-webkit-scrollbar {
-  width: 1rem;
+  width: 0.5rem;
   margin-right: none;
 }
 
@@ -322,7 +524,8 @@ a:hover {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(218, 39, 39, 0.966);
+  background: rgba(139, 3, 3, 0.966);
+  border-radius: 16px;
 }
 
 /* Handle on hover */

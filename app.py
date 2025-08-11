@@ -19,7 +19,7 @@ except FileNotFoundError:
 # Configure Gemini
 # ==============================
 try:
-    api_key = os.getenv("GEMINI_API_KEY") or "AIzaSyCl-k1r7G4KRj85r4yV6BS8hCEnS8UsjIU"
+    api_key = os.getenv("GEMINI_API_KEY")
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel("gemini-1.5-flash")
     print("✅ Gemini configured successfully")

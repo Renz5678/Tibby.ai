@@ -24,6 +24,60 @@
       ]
     },
     {
+    "tag": "school_location",
+    "patterns": [
+        "Where is the school located?",
+        "What is the address of the school?",
+        "How can I get to General Tiburcio de Leon National High School?",
+        "Location of General Tiburcio de Leon National High School",
+        "Where is GTDLNHS?",
+        "How do I find the school?"
+    ],
+    "responses": [
+        "🐾 General Tiburcio de Leon National High School is located at Corner Mercado St., General T. de Leon, Valenzuela City, Metro Manila, Philippines."
+    ],
+    "context_set": ""
+    },
+    {
+    "tag": "school_requirements_and_activities",
+    "patterns": [
+        "What are the requirements for moving up or graduating?",
+        "What do I need to graduate?",
+        "What do I need to move up?",
+        "Are school projects and performance tasks required?",
+        "Are performance tasks mandatory?",
+        "Do we need to submit projects?",
+        "Is Work Immersion required in SHS?",
+        "Do I have to do Work Immersion?",
+        "Is Work Immersion mandatory in Senior High School?"
+    ],
+    "responses": [
+        "🐾 To move up, you must complete the required academic level and submit important documents such as your Certificate of Completion and Certificate of Good Moral Character. To graduate from Senior High School, you must complete all required subjects for both Grade 11 and Grade 12, and meet the school’s academic and behavioral standards.",
+        "🐾 Performance tasks are part of the grading system and are required in every subject. Projects, on the other hand, may vary depending on your teacher. Always check with your subject teachers for specific instructions and deadlines.",
+        "🐾 Yes, work immersion is a required component for graduation in the Senior High School (SHS) program. It's a mandatory course under the K to 12 curriculum."
+    ],
+    "context_set": ""
+    },
+    {
+    "tag": "academic_concerns",
+    "patterns": [
+        "How can I view my grades?",
+        "Where can I see my grades?",
+        "How do I check my grades?",
+        "What happens if I fail a subject?",
+        "What should I do if I fail a subject?",
+        "Can I transfer strands in SHS?",
+        "How do I change my SHS strand?",
+        "Is it possible to switch strands in Senior High School?"
+    ],
+    "responses": [
+        "🐾 You can view your grades during the scheduled card distribution day. Your teachers and advisers will also be available to discuss your performance and answer any questions you may have. We encourage you to attend with a parent or guardian so everyone stays informed about your academic progress.",
+        "🐾 If you fail a subject, you will need to retake it to meet the academic requirements. Don’t worry—your teachers are here to support you, and there are always ways to improve and succeed with effort and commitment.",
+        "🐾 Yes, you may transfer to a different strand in Senior High School. However, you’ll need to take any subjects required in your new strand that you haven’t completed in your previous one. It's best to consult with the academic coordinator or your adviser to guide you through the process."
+    ],
+    "context_set": ""
+    },
+    {
       "tag": "admissions",
       "patterns": [
         "How to enroll",
@@ -78,7 +132,8 @@
       "patterns": [
         "Student clubs",
         "Organizations",
-        "Extracurricular activities"
+        "Extracurricular activities",
+        "Clubs"
       ],
       "responses": [
         "🎯 We have many clubs and orgs to join, like:\n- Ang Daluyan\n- Ecosavers Club\n- English Club\n- ESP Club\n- Junior’s Computers Club\n- Language Club\n- Library Club\n- Math Club\n- Nexus Club\n- Science Club\n- Sipnayan Club\n- Siyensaya Club\n- Social Science Club\n- The Genzette\n- TLE Club"
@@ -102,7 +157,8 @@
       "patterns": [
         "Uniform policy",
         "PE attire",
-        "Dress code"
+        "Dress code",
+        "Wear PE"
       ],
       "responses": [
         "👕 Junior High: Uniform Mon–Thu, PE attire Fri.\n👕 Senior High: PE attire on HOPE day, uniforms on other days."
@@ -154,6 +210,23 @@
       "responses": [
         "📜 Follow our Code of Conduct: respect, responsibility, and kindness. Breaking rules can result in suspension or expulsion."
       ]
+    },
+
+    {
+    "tag": "student_engagement",
+    "patterns": [
+        "Can I join a club?",
+        "Can I join a student organization?",
+        "Are there student clubs at GTDLNHS?",
+        "How can I run for SSG?",
+        "How do I join the Supreme Student Government?",
+        "Student engagement activities",
+        "What student organizations are available?"
+    ],
+    "responses": [
+        "🐾 Absolutely! Most clubs and organizations open membership at the start of the school year, so keep an eye out for announcements.",
+        "🐾 You may reach out to Sir Arnielson Calubiran or visit the SSLG headquarters to file your candidacy form."
+    ]
     },
     {
       "tag": "farewell",

@@ -1,3 +1,7 @@
+// ---------------------------
+// Chatbot Functions
+// ---------------------------
+
 // Handle sending a message to the backend
 function sendMessage() {
     const input = document.getElementById("query");
@@ -11,7 +15,7 @@ function sendMessage() {
     // Disable input during response (optional UX feature)
     input.disabled = true;
 
-    // Send message to Flask backend at /predict
+    // Send message to Flask backend at /chat
     fetch("/chat", {
         method: "POST",
         headers: {
@@ -48,7 +52,23 @@ function addMessage(sender, message) {
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-// Enable Enter key to send
+// ---------------------------
+// Navigation Toggle (Mobile)
+// ---------------------------
+function initNavToggle() {
+    const toggleBtn = document.getElementById("navToggle");
+    const navPane = document.querySelector(".navipane");
+
+    if (!toggleBtn || !navPane) return; // Safety check
+
+    toggleBtn.addEventListener("click", () => {
+        navPane.classList.toggle("open");
+    });
+}
+
+// ---------------------------
+// Page Initialization
+// ---------------------------
 document.addEventListener("DOMContentLoaded", () => {
     // Show greeting right away
     addMessage("Tibby", "👋 Hello, Gentinian! I am Tibby, GTDLNHS' cutest chatbot. How may I help you today?");
@@ -60,5 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
             sendMessage();
         }
     });
-});
 
+    // Init mobile navigation toggle
+    initNavToggle();
+});
