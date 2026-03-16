@@ -3,7 +3,7 @@
  * Handles all backend communication
  */
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://tibby-backend.onrender.com';
+const API_URL = 'https://tibby-backend.onrender.com';
 
 /**
  * Send a chat message to the backend
