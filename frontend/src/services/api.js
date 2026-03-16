@@ -21,20 +21,26 @@ export async function sendChatMessage(message) {
         });
 
         if (!response.ok) {
-            if (response.status === 429) {
-                throw new Error('Too many requests. Please wait a moment.');
-            }
-            if (response.status === 400) {
+            // Try to get the friendly message the backend sends in 'reply'
+            let friendlyMsg = 'Something went wrong. Please try again.';
+            try {
                 const data = await response.json();
-                throw new Error(data.error || 'Invalid request');
+                if (data.reply) friendlyMsg = data.reply;
+            } catch (_) { /* ignore parse errors */ }
+
+            if (response.status === 429) {
+                throw new Error('⏳ Too many requests. Please wait a moment before trying again.');
             }
-            throw new Error('Failed to send message');
+            throw new Error(friendlyMsg);
         }
 
-        return await response.json();
+        const data = await response.json();
+        // Guard: ensure reply is always a string
+        if (!data.reply) data.reply = '🐾 I received your message but had trouble forming a response. Please try again!';
+        return data;
     } catch (error) {
-        if (error.message.includes('Failed to fetch')) {
-            throw new Error('Unable to connect to server. Please check your connection.');
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+            throw new Error('📶 Unable to connect to the server. Please check your internet connection.');
         }
         throw error;
     }

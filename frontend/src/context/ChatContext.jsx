@@ -119,7 +119,9 @@ export function ChatProvider({ children }) {
 
             const errorMessage = {
                 id: (Date.now() + 1).toString(),
-                text: `Sorry, I encountered an error: ${error.message}`,
+                text: error.message && !error.message.includes('undefined')
+                    ? error.message
+                    : '🐾 Oops! Something went wrong. Please try again in a moment.',
                 sender: 'bot',
                 timestamp: new Date(),
                 isError: true,
