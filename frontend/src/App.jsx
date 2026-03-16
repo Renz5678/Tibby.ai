@@ -3,7 +3,9 @@ import { ChatProvider } from './context/ChatContext';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header';
 import ChatBox from './components/ChatBox/ChatBox';
+import RestorePrompt from './components/RestorePrompt/RestorePrompt';
 import './App.css';
+
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -15,6 +17,7 @@ function App() {
   return (
     <ChatProvider>
       <div className="app">
+        <RestorePrompt />
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <main className="main-content">
           <Header onMenuClick={toggleSidebar} />

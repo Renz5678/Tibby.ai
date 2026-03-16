@@ -66,18 +66,37 @@ const initialState = {
 export function ChatProvider({ children }) {
     const [state, dispatch] = useReducer(chatReducer, initialState);
     const [, setStoredMessages] = useLocalStorage('chat-history', []);
+    const [showRestorePrompt, setShowRestorePrompt] = React.useState(false);
+    const [pendingHistory, setPendingHistory] = React.useState(null);
 
-    // Load history on mount
+    // Load history on mount — show prompt if history exists
     React.useEffect(() => {
         const stored = localStorage.getItem('chat-history');
         if (stored) {
             try {
                 const messages = JSON.parse(stored);
-                dispatch({ type: ACTIONS.LOAD_HISTORY, payload: messages });
+                if (messages && messages.length > 0) {
+                    setPendingHistory(messages);
+                    setShowRestorePrompt(true);
+                }
             } catch (error) {
                 console.error('Error loading chat history:', error);
             }
         }
+    }, []);
+
+    const handleRestoreYes = useCallback(() => {
+        if (pendingHistory) {
+            dispatch({ type: ACTIONS.LOAD_HISTORY, payload: pendingHistory });
+        }
+        setShowRestorePrompt(false);
+        setPendingHistory(null);
+    }, [pendingHistory]);
+
+    const handleRestoreNo = useCallback(() => {
+        localStorage.removeItem('chat-history');
+        setShowRestorePrompt(false);
+        setPendingHistory(null);
     }, []);
 
     // Save messages to localStorage whenever they change
@@ -150,6 +169,9 @@ export function ChatProvider({ children }) {
         sendMessage,
         clearChat,
         setInputValue,
+        showRestorePrompt,
+        handleRestoreYes,
+        handleRestoreNo,
     };
 
     return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

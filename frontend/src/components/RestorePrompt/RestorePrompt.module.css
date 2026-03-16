@@ -1,0 +1,116 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(139, 3, 3, 0.35);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(255, 228, 196, 0.6);
+    border-radius: var(--radius-2xl, 1.5rem);
+    padding: 2.25rem 2.5rem 2rem;
+    text-align: center;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(139, 3, 3, 0.2), 0 4px 16px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(28px) scale(0.97); opacity: 0; }
+    to   { transform: translateY(0)    scale(1);    opacity: 1; }
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    animation: floatAvatar 3s ease-in-out infinite;
+    filter: drop-shadow(0 6px 14px rgba(139, 3, 3, 0.25));
+}
+
+@keyframes floatAvatar {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+}
+
+.title {
+    font-family: var(--font-display, 'Outfit', sans-serif);
+    font-size: 1.3rem;
+    font-weight: var(--font-bold, 700);
+    background: linear-gradient(135deg, #8b0303 0%, #5a0101 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 0.5rem;
+}
+
+.description {
+    font-family: var(--font-primary, 'Inter', sans-serif);
+    font-size: var(--text-sm, 0.9rem);
+    color: var(--gray-600, #4b5563);
+    margin: 0 0 1.75rem;
+    line-height: 1.55;
+}
+
+.actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.btnYes,
+.btnNo {
+    flex: 1;
+    padding: 0.7rem 1.1rem;
+    border-radius: var(--radius-full, 9999px);
+    border: none;
+    font-family: var(--font-primary, 'Inter', sans-serif);
+    font-size: var(--text-sm, 0.9rem);
+    font-weight: var(--font-semibold, 600);
+    cursor: pointer;
+    transition: all var(--transition-base, 300ms cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.btnYes {
+    background: linear-gradient(135deg, rgba(139, 3, 3, 0.966) 0%, rgb(121, 25, 25) 100%);
+    color: bisque;
+    box-shadow: 0 4px 14px rgba(139, 3, 3, 0.35);
+}
+
+.btnYes:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(139, 3, 3, 0.45);
+}
+
+.btnYes:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.btnNo {
+    background: rgba(255, 228, 196, 0.5);
+    color: var(--primary-maroon, rgba(139, 3, 3, 0.966));
+    border: 1.5px solid rgba(255, 228, 196, 0.9);
+}
+
+.btnNo:hover {
+    background: rgba(255, 228, 196, 0.85);
+    transform: translateY(-2px);
+}
+
+.btnNo:active {
+    transform: translateY(0) scale(0.98);
+}
+

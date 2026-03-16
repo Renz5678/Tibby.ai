@@ -24,7 +24,6 @@ export default function Message({ message }) {
                 <p className={styles.text}>{displayText}</p>
                 <div className={styles.meta}>
                     <span className={styles.time}>{formatTime(timestamp)}</span>
-                    {cached && <span className={styles.cachedBadge}>💾 cached</span>}
                 </div>
             </div>
         </div>
