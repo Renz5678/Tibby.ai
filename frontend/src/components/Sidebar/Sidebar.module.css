@@ -1,0 +1,185 @@
+/* ── Overlay (mobile only; rendered in DOM only when isOpen=true via JSX) ── */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* ── Sidebar base (shared) ── */
+.sidebar {
+    height: 100vh;
+    background-color: var(--primary-maroon);
+    color: var(--bisque);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-shrink: 0;
+}
+
+/* ── Header ── */
+.header {
+    padding: var(--space-5) var(--space-4);
+    border-bottom: 1px solid rgba(255, 228, 196, 0.2);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.logoIcon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.logo h2 {
+    font-size: 1.8rem;
+    font-weight: var(--font-bold);
+    font-family: "Staatliches", sans-serif;
+    color: var(--bisque);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 12ch;
+    animation: typing 1.5s steps(7) forwards;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to   { width: 12ch }
+}
+
+/* ── Content area ── */
+.content {
+    flex: 1;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    overflow-y: auto;
+}
+
+.section h3 {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    color: rgba(255, 228, 196, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-2);
+}
+
+.section p {
+    font-size: 0.82rem;
+    color: var(--bisque);
+    line-height: var(--leading-relaxed);
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* ── Contact ── */
+.contactItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    font-size: 0.82rem;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+.contactItem a {
+    color: var(--bisque);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    word-break: break-all;
+    line-height: 1.4;
+}
+
+.contactItem a:hover {
+    text-decoration: underline;
+    opacity: 0.9;
+}
+
+/* ── Address ── */
+.address {
+    font-size: 0.82rem;
+    color: var(--bisque);
+    line-height: var(--leading-relaxed);
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* ── Social ── */
+.social {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(255, 228, 196, 0.1);
+    border-radius: var(--radius-lg);
+    color: var(--bisque);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: all var(--transition-base);
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+}
+
+.socialLink:hover {
+    background: rgba(255, 228, 196, 0.2);
+    transform: translateY(-1px);
+}
+
+/* ── Footer ── */
+.footer {
+    padding: var(--space-4);
+    border-top: 1px solid rgba(255, 228, 196, 0.15);
+    text-align: center;
+}
+
+.footer p {
+    font-size: var(--text-xs);
+    color: rgba(255, 228, 196, 0.7);
+}
+
+/* ══ MOBILE (≤767px): sidebar is a slide-in drawer ══ */
+@media (max-width: 767px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 85vw;
+        max-width: 300px;
+        z-index: 1000;
+        transition: left var(--transition-base);
+        box-shadow: var(--shadow-2xl);
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+}
+
+/* ══ DESKTOP (≥768px): always-visible left panel ══ */
+@media (min-width: 768px) {
+    /* Overlay is not used on desktop */
+    .overlay {
+        display: none !important;
+    }
+
+    .sidebar {
+        width: 280px;
+        position: sticky;
+        top: 0;
+    }
+}

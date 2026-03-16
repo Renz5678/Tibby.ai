@@ -420,7 +420,7 @@ a:hover {
         flex-direction: row; 
         justify-content: flex-start; 
         padding: 0.5rem;
-        width: 100% /* Account for padding */
+        width: 100%; /* Account for padding */
         position: sticky;
         top: 0;
         background: inherit;
@@ -531,4 +531,86 @@ a:hover {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(121, 25, 25);
+}
+
+/* ---------------------------
+   Typing Indicator Animation
+   --------------------------- */
+.typing-indicator {
+    padding: 12px 16px !important;
+    background: #f0f0f0;
+    border-radius: 18px;
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.typing-dots span {
+    width: 8px;
+    height: 8px;
+    background: #999;
+    border-radius: 50%;
+    display: inline-block;
+    animation: typing-bounce 1.4s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing-bounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* ---------------------------
+   Message Animations
+   --------------------------- */
+.messages__item {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------------------------
+   Smooth Transitions
+   --------------------------- */
+.messages__item {
+    transition: all 0.3s ease;
+}
+
+.messages__item:hover {
+    transform: translateX(-2px);
+}
+
+.messages__item--operator:hover {
+    transform: translateX(2px);
 }
