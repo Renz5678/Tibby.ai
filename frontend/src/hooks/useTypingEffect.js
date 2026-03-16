@@ -26,8 +26,9 @@ export function useTypingEffect(text, speed = 30) {
 
         const interval = setInterval(() => {
             if (index < chars.length) {
-                setDisplayedText((prev) => prev + chars[index]);
+                const currentChar = chars[index];
                 index++;
+                setDisplayedText((prev) => prev + currentChar);
             } else {
                 clearInterval(interval);
             }
