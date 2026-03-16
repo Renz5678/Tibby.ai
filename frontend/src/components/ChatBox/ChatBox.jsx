@@ -40,8 +40,13 @@ export default function ChatBox() {
                 {messages.length === 0 ? (
                     <div className={styles.welcome}>
                         <div className={styles.welcomeContent}>
+                            <img
+                                src="/tibby-icon.png"
+                                alt="Tibby"
+                                className={styles.welcomeAvatar}
+                            />
                             <h1 className={styles.welcomeTitle}>
-                                👋 Hello, Gentinian!
+                                Hello, Gentinian!
                             </h1>
                             <p className={styles.welcomeText}>
                                 I'm Tibby, your friendly GTDLNHS chatbot. How can I help you today?

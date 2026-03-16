@@ -33,20 +33,21 @@
 }
 
 .logo {
-    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.logoImg {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 50%;
     animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-5px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-5px); }
 }
 
 .info {
@@ -101,8 +102,9 @@
         justify-content: center;
     }
 
-    .logo {
-        font-size: 2rem;
+    .logoImg {
+        width: 38px;
+        height: 38px;
     }
 
     .title {

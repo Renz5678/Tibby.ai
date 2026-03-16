@@ -35,6 +35,20 @@
     animation: fadeInUp 0.6s ease-out;
 }
 
+.welcomeAvatar {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: var(--space-4);
+    animation: floatAvatar 3s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(139, 3, 3, 0.2));
+}
+
+@keyframes floatAvatar {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;

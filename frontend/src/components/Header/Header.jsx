@@ -22,7 +22,9 @@ export default function Header({ onMenuClick }) {
             </button>
 
             <div className={styles.branding}>
-                <div className={styles.logo}>🐾</div>
+                <div className={styles.logo}>
+                    <img src="/tibby-icon.png" alt="Tibby" className={styles.logoImg} />
+                </div>
                 <div className={styles.info}>
                     <h1 className={styles.title}>Tibby</h1>
                     <p className={styles.subtitle}>GTDLNHS Chatbot Assistant</p>
