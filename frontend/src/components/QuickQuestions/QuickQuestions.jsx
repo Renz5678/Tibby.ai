@@ -3,11 +3,11 @@ import { useChat } from '../../context/ChatContext';
 import styles from './QuickQuestions.module.css';
 
 const quickQuestions = [
-    { label: '📝 How to enroll?',           message: 'How do I enroll?' },
-    { label: '📍 Where is the school?',      message: 'Where is the school located?' },
+    { label: '📝 How to enroll?', message: 'How do I enroll?' },
+    { label: '📍 Where is the school?', message: 'Where is the school located?' },
     { label: '🎓 What strands are offered?', message: 'What strands are offered in Senior High School?' },
     { label: '🎯 What clubs are available?', message: 'What clubs and organizations are available?' },
-    { label: '📞 Contact information',       message: 'How can I contact the school?' },
+    { label: '📞 Contact information', message: 'Contact information?' },
 ];
 
 export default function QuickQuestions({ onClose }) {
