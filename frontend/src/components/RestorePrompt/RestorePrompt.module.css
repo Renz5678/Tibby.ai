@@ -114,3 +114,38 @@
     transform: translateY(0) scale(0.98);
 }
 
+/* Mobile — small Android screens */
+@media (max-width: 767px) {
+    .modal {
+        padding: 1.75rem 1.5rem 1.5rem;
+        max-width: 340px;
+        width: 92%;
+        /* Prevent overflow on short landscape Android screens */
+        max-height: 90dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .avatar {
+        width: 64px;
+        height: 64px;
+    }
+
+    .title {
+        font-size: 1.15rem;
+    }
+
+    .description {
+        font-size: 0.85rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .btnYes,
+    .btnNo {
+        /* 44px minimum touch height */
+        min-height: 44px;
+        font-size: 0.85rem;
+    }
+}
+
+

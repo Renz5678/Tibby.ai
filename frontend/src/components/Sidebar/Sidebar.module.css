@@ -11,7 +11,7 @@
 
 /* ── Sidebar base (shared) ── */
 .sidebar {
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--primary-maroon);
     color: var(--bisque);
     display: flex;
@@ -19,6 +19,9 @@
     overflow-y: auto;
     overflow-x: hidden;
     flex-shrink: 0;
+    /* Scroll independently without affecting page on Android */
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* ── Header ── */
@@ -143,6 +146,8 @@
 /* ── Footer ── */
 .footer {
     padding: var(--space-4);
+    /* Prevent content being cut by Android gesture navigation bar */
+    padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid rgba(255, 228, 196, 0.15);
     text-align: center;
 }
@@ -158,8 +163,9 @@
         position: fixed;
         top: 0;
         left: -100%;
-        width: 85vw;
-        max-width: 300px;
+        width: 82vw;
+        max-width: 290px;
+        height: 100dvh;
         z-index: 1000;
         transition: left var(--transition-base);
         box-shadow: var(--shadow-2xl);

@@ -24,9 +24,12 @@
     transition: all var(--transition-base);
 }
 
-.bubble:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+/* Only apply hover lift on devices with a true pointer (not touch screens) */
+@media (hover: hover) and (pointer: fine) {
+    .bubble:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
 }
 
 .user .bubble {
@@ -82,8 +85,9 @@
 /* Mobile */
 @media (max-width: 767px) {
     .bubble {
-        max-width: 85%;
+        /* 90% suits 360px-wide Android screens common in the Philippines */
+        max-width: 90%;
         font-size: 0.9rem;
-        padding: 10px 16px;
+        padding: 10px 14px;
     }
 }

@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    height: calc(100vh - 80px);
+    /* Use dvh so the container resizes correctly when Android Chrome's
+       address bar hides / shows */
+    height: calc(100dvh - 80px);
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -117,6 +119,8 @@
     align-items: center;
     gap: var(--space-3);
     padding: var(--space-5) var(--space-6);
+    /* Extra bottom padding for Android gesture navigation bar */
+    padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
     background: rgba(139, 3, 3, 0.95);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 228, 196, 0.1);
@@ -194,28 +198,49 @@
 /* Mobile */
 @media (max-width: 767px) {
     .container {
-        height: calc(100vh - 70px);
+        height: calc(100dvh - 60px);
         box-shadow: none;
     }
 
     .welcome {
-        padding: var(--space-6);
+        padding: var(--space-4) var(--space-5);
+    }
+
+    .welcomeAvatar {
+        width: 90px;
+        height: 90px;
     }
 
     .welcomeTitle {
         font-size: var(--text-2xl);
     }
 
+    .welcomeText {
+        font-size: var(--text-sm);
+    }
+
     .messages {
-        padding: var(--space-4);
+        padding: var(--space-3) var(--space-4);
     }
 
     .inputForm {
-        padding: var(--space-4);
+        padding: var(--space-3) var(--space-4);
+        /* Preserve gesture-nav inset on mobile too */
+        padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+        gap: var(--space-2);
+    }
+
+    .input {
+        /* ≥16px prevents Android Chrome from auto-zooming on focus */
+        font-size: 16px;
+        padding: var(--space-3) var(--space-4);
     }
 
     .sendButton {
-        width: 48px;
-        height: 48px;
+        /* 44px minimum touch target per Android accessibility guidelines */
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
     }
 }
