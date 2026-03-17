@@ -61,10 +61,6 @@ export default function Sidebar({ isOpen, onClose }) {
                         <QuickQuestions onClose={onClose} />
                     </section>
                 </div>
-
-                <div className={styles.footer}>
-                    <p>Made with 💙 for Gentinians</p>
-                </div>
             </aside>
         </>
     );
